@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}<title>Doctors</title>{% endblock %}
+{% block nav %}
+<div class="form-inline my-2 my-lg-0">
+        {% if user.is_authenticated %}
+        <h6 class="text-dark mx-3 my-auto">Hello, Admin</h6>
+        <a class="btn btn-primary mx-2" href="/dashboard" role="button">Dashboard</a>
+        <a class="btn btn-danger mx-2" href="/logout" role="button">Logout</a>
+        {% else %}
+        <a class="btn btn-success mx-2" href="/admin_login" role="button">Admin Login</a>
+        {% endif %}
+
+</div>
+{% endblock %}
+{% block header %}
+<header class="masthead text-white text-center" style="background:url('{% static '/images/background-png.png' %}')no-repeat center center fixed;background-size:cover;">
+    <div class="text-center">
+        <h1 class='text-monospace text-light' style="height:1rem; text-align:center;">MEET OUR PROGRAMMING SPEACIALIST TEAM</h1>
+    </div>
+    <hr class="bg-light" style="width:100%;">
+    <div class="container">
+            <div class="row">
+                    {% for p in hosts %}
+                        <div class="col">
+                        <div class="col mx-auto my-3">
+                                    <div class="card text-dark" style="width: 14rem;">
+                                            <img src="/media/{{ p.host_image }}" class="card-img-top" style="width:300px;height:300px;" alt="...">
+                                            <div class="card-body">
+                                              <h5 class="card-title">{{ p.host_name }}</h5>
+                                              <p class="card-text">{{ p.host_desc }}</p>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                              <li class="list-group-item bg-success text-light">{{ p.available }}</li>
+                                            </ul>
+                                    </div>
+                        </div>
+                        </div>
+                        {% endfor %}
+            </div>
+    </div>
+</header>
+{% endblock %}
+{% block footer %}
+<hr><br>
+<footer class="footer bg-danger">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 h-100 text-center text-lg-left">
+                    <p class="text-white small mb-4 mb-lg-0">Copyright © 2021 - Visitor Management System. Visit <a href="https://postgrethon.wordpress.com/" class="text-white">Our Website</a></p>
+                </div>
+                <div class="col-lg-6 h-100 text-center text-lg-right">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item ">
+                            <a href="#"><i class="fa fa-facebook fa-2x fa-fw text-white"></i></a>
+                            <a href="#"><i class="fa fa-twitter fa-2x fa-fw text-white"></i></a>
+                            <a href="#"><i class="fa fa-instagram fa-2x fa-fw text-white"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+</footer>
+{% endblock %}
